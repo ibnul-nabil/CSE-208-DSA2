@@ -1,0 +1,83 @@
+    prb = 0;
+    
+    int successful = 0;
+
+    for(auto i : search_strings){
+        
+       
+        if (db_hash2.Find(i , hash_str2 , prb)) {   
+            successful++;
+        }
+       
+        //cout  << prb << endl;
+    }
+    cout << (1.0*prb)/1000 << " successful " << successful << endl;
+
+ // cout << "total collision in sp for hash function 1: " << sp1.getCollision() <<  endl;
+    // cout << "total collision in sp for hash function 2: " << sp2.getCollision() <<  endl;
+
+    // cout << "total collision in double hash for hash function 1: " << db_hash1.getCollision() <<  endl;
+    // cout << "total collision in double hash for hash function 2: " << db_hash2.getCollision() <<  endl;
+
+    // cout << "total collision in cp for hash function 1: " << cp1.getCollision() <<  endl;
+    // cout << "total collision in cp for hash function 2: " << cp2.getCollision() <<  endl;
+
+
+
+int n ;
+    cin >> n ;
+
+    seperate_chaining sp1(n);
+    seperate_chaining sp2(n);
+
+    double_hashing db_hash1(n);
+    double_hashing db_hash2(n);
+
+    custom_probe cp1(n);
+    custom_probe cp2(n);
+    
+    int counter = 1;
+    int prb = 1;
+    for(int i = 0 ; i < strings.size() ;i++){
+        if (counter > n) break;
+        prb = 1;
+        if (db_hash1.Find(strings[i], hash_str1 , prb) ){
+            continue;
+        }
+        else {
+            object obj;
+            obj.key = strings[i];
+            obj.value = counter;
+
+            db_hash1.Insert(obj, hash_str1);
+            db_hash2.Insert(obj, hash_str2);
+
+            sp1.Insert(obj, hash_str1);
+            sp2.Insert(obj, hash_str2);
+
+            cp1.Insert(obj, hash_str1);
+            cp2.Insert(obj, hash_str2);
+
+            counter++;
+        }
+        
+    }
+
+
+
+    vector <int> probe(6, 1);
+    vector <int> succ(6,0);
+    for(auto i : search_strings){
+        if(sp1.Find(i, hash_str1 , probe[0])) succ[0]++ ;
+        if(sp2.Find(i, hash_str2 , probe[1])) succ[1]++;
+
+        if (db_hash1.Find(i, hash_str1 , probe[2])) succ[2]++;
+        if (db_hash2.Find(i, hash_str2 , probe[3])) succ[3]++;
+
+        if (cp1.Find(i, hash_str1 , probe[4])) succ[4]++;
+        if (cp2.Find(i, hash_str2 , probe[5])) succ[5]++;
+    }
+
+    forn(6){
+        cout <<  (probe[i]*1.0)/1000 << " " << succ[i] <<  endl;
+    }

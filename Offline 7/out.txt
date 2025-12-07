@@ -1,0 +1,21 @@
+Hash Table Size :5000
+Collision Resolution Method   Hash 1                                 Hash 2                                 
+                              # of Collisions  Avg Probes  # of Collisions     Avg Probes 
+Chaining                      98             1.021            98            1.019
+Double Hashing                127             1.226          114                1.274
+Custom Probing                124             1.23          114                1.255
+
+Hash Table Size :10000
+Collision Resolution Method   Hash 1                                 Hash 2                                 
+                              # of Collisions  Avg Probes  # of Collisions     Avg Probes 
+Chaining                      40             1.008            48            1.01
+Double Hashing                47             1.12          55                1.111
+Custom Probing                44             1.11          55                1.106
+
+Hash Table Size :1000
+Collision Resolution Method   Hash 1                                 Hash 2                                 
+                              # of Collisions  Avg Probes  # of Collisions     Avg Probes 
+Chaining                      348             1.339            357            1.336
+Double Hashing                3235             94.626          3657                89.06
+Custom Probing                4298             114.006          3767                116.739
+
